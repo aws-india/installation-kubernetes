@@ -29,6 +29,7 @@ sudo apt-get install -y apt-transport-https
 sleep 5s
 
 echo ".....................Installing kubeadm kubelet kubectl"
+sudo mkdir /etc/apt/keyrings
 
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
 sleep 30s
