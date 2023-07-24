@@ -1,5 +1,26 @@
 sudo apt-get update
 
+echo "....................swapoff"
+
+swapoff -a
+
+echo "....................Installing sshpass "
+
+sudo apt-get install -y sshpass   
+
+echo "....................openssh server installation"
+sudo apt-get install -y openssh-server
+
+sudo apt-get update
+echo "....................Docker installtion"
+
+sudo apt-get install docker
+
+systemctl daemon-reload
+systemctl restart docker
+
+sudo apt-get update
+
 sleep 5s
 
 sudo apt-get install -y ca-certificates curl
