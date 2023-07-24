@@ -12,9 +12,20 @@ echo "....................openssh server installation"
 sudo apt-get install -y openssh-server
 
 sudo apt-get update
-echo "....................Docker installtion"
 
-sudo apt-get install docker
+echo 
+echo "**** install docker ****"
+echo 
+
+curl -fsSL https://get.docker.com | bash
+
+echo 
+echo "**** config deamon cgroup ****"
+echo 
+
+echo '{"exec-opts": ["native.cgroupdriver=systemd"],"log-driver": "json-file","log-opts": {"max-size": "100m"},"storage-driver": "overlay2"}' > /etc/docker/daemon.json
+
+mkdir -p /etc/systemd/system/docker.service.d
 
 systemctl daemon-reload
 systemctl restart docker
