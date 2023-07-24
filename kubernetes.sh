@@ -39,7 +39,9 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://a
 sudo apt-get update
 sleep 5s
 
-sudo apt-get install -y kubeadm=1.10.5-00 kubectl=1.10.5-00 kubelet=1.10.5-00
+sudo apt-get -y install kubectl
+sudo apt-get -y install kubeadm
+sudo apt-get -y install kubelet
 
 sleep 5s
 
