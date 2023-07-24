@@ -32,24 +32,24 @@ sudo usermod -aG docker ${USER}
 
 
 
-sudo apt-get update 
+sudo apt-get update && apt-get install -y apt-transport-https curl
 
-echo ".....................Installing kubeadm kubelet kubectl"
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
-sudo apt-get install -y ca-certificates curl
-sleep 5s
-sudo apt-get install -y apt-transport-https
-
-curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
 sleep 30s
 
-echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
 
 sudo apt-get update
 
-sudo apt-get install -y kubeadm
-sudo apt-get install -y kubectl
-sudo apt-get install -y kubelet
+echo ".....................Installing kubeadm kubelet kubectl"
+
+sudo apt-get install -y kubeadm=1.10.5-00 kubectl=1.10.5-00 kubelet=1.10.5-00
+
+apt-mark hold kubelet kubeadm kubectl
+
 
 echo ".......................Restart kubelet"
 
